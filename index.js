@@ -8,6 +8,16 @@ const ANY = '$ANY'
 
 const isDirectValue = val => ['boolean', 'number', 'string'].indexOf(typeof val) !== -1 || val === null
 
+const validatorAny = object => {
+	if (Array.isArray(object)) {
+		return object
+			.map(val => validatorAny(val))
+			.indexOf(false) === -1
+	}
+	const {value, target} = object
+	return value === target
+}
+
 const validator = (schema, object) => {
 	if (isDirectValue(schema)) {
 		return {value: schema, target: object, msg: `${object} is value`}
@@ -20,13 +30,8 @@ const validator = (schema, object) => {
 			return {value: typeof object, target: 'number', msg: `${object} is number`}
 		} else if (schema.$type === ANY) {
 			const result = schema.$values
-				.map(anySchema => {
-					return validator(anySchema, object)
-				})
-				.find(({value, target}) => {
-					console.log(value, target)
-					return value === target
-				})
+				.map(anySchema => validator(anySchema, object))
+				.find(anyObject => validatorAny(anyObject))
 
 			if (typeof result === 'undefined') {
 				return {value: false, target: true, msg: `${object} is not any`}
