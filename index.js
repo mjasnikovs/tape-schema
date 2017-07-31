@@ -15,13 +15,17 @@ const FUNCTION = '$FUNCTION'
 const isDirectValue = val => ['boolean', 'number', 'string'].indexOf(typeof val) !== -1 || val === null
 
 const showObject = val => {
-	const value = isDirectValue(val) ? val : JSON.stringify(val, null, 2)
+	if (typeof val === 'function') {
+		return `${colors.white('[')}${colors.yellow('Function')}${colors.white(']')}`
+	}
+
+	const value = isDirectValue(val) ? val : JSON.stringify(val, null, 4)
 
 	if (typeof value === 'number' || typeof value === 'boolean' || value === null) {
 		return colors.yellow(value)
 	}
 
-	return colors.green(`"${value}"`)
+	return colors.green(`'${value}'`)
 }
 
 const validAny = object => {
