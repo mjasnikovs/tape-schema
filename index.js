@@ -60,8 +60,8 @@ const validator = (schema, object, prefix = '') => {
 			}
 		} else if (schema.$type === NUMBER) {
 			return {
-				value: typeof object,
-				target: 'number',
+				value: typeof object === 'number' && Number(object) === object && object !== Infinity,
+				target: true,
 				msg: `${colors.white(prefix)} = ${showObject(object)} ${colors.brightBlack('schema.number')}`
 			}
 		} else if (schema.$type === BOOLEAN) {
