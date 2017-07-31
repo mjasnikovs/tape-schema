@@ -3,7 +3,7 @@ const schema = require('../index.js')
 
 test('string', t => {
 	const objectTarget = {
-		id: schema.any([schema.number, null]),
+		id: schema.number,
 		name: schema.string
 	}
 
@@ -16,7 +16,14 @@ test('string', t => {
 		directFalse: false,
 		directString: 'String',
 		directNumber: 'Number',
-		arrayWrongTarget: [schema.any([schema.string, [objectTarget]])]
+		arrayWrongTarget: [schema.any([null, objectTarget])],
+		friendList: [
+			{
+				id: schema.number,
+				name: schema.string,
+				friends: [schema.number]
+			}
+		]
 	}
 
 	const object = {
@@ -29,7 +36,19 @@ test('string', t => {
 		directString: 'String',
 		directNumber: 'Number',
 		arrayTarget: ['One', 'Two', null],
-		arrayWrongTarget: ['apple', [{id: 1, name: 'Edgars'}, {id: null, name: 'Joe'}]]
+		arrayWrongTarget: [null, {id: 1, name: 'Edgars'}],
+		friendList: [
+			{
+				id: 1,
+				name: 'Edgars',
+				friends: [4, 2, 3]
+			},
+			{
+				id: 2,
+				name: 'Joe',
+				friends: [1, 4, 3]
+			}
+		]
 	}
 
 	schema.test(t, target, object)
