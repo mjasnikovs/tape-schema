@@ -10,6 +10,7 @@ test('string', t => {
 	const target = {
 		string: schema.string,
 		number: schema.number,
+		boolean: schema.boolean,
 		anyWithString: schema.any([schema.string, schema.number]),
 		anyWithNumber: schema.any([schema.string, schema.number]),
 		directTrue: true,
@@ -29,6 +30,7 @@ test('string', t => {
 	const object = {
 		string: 'Some string',
 		number: 1,
+		boolean: true,
 		anyWithString: 'Any string',
 		anyWithNumber: 2,
 		directTrue: true,

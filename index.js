@@ -5,6 +5,7 @@ const $TAPE_SCHEMA = '$TAPE_SCHEMA'
 const STRING = '$STRING'
 const NUMBER = '$NUMBER'
 const ANY = '$ANY'
+const BOOLEAN = '$BOOLEAN'
 
 const isDirectValue = val => ['boolean', 'number', 'string'].indexOf(typeof val) !== -1 || val === null
 
@@ -62,6 +63,12 @@ const validator = (schema, object, prefix = '') => {
 				value: typeof object,
 				target: 'number',
 				msg: `${colors.white(prefix)} = ${showObject(object)} ${colors.brightBlack('schema.number')}`
+			}
+		} else if (schema.$type === BOOLEAN) {
+			return {
+				value: typeof object,
+				target: 'boolean',
+				msg: `${colors.white(prefix)} = ${showObject(object)} ${colors.brightBlack('schema.boolean')}`
 			}
 		} else if (schema.$type === ANY) {
 			const result = schema.$values.map(anySchema => validator(anySchema, object, prefix))
@@ -128,6 +135,11 @@ const number = {
 	$type: NUMBER
 }
 
+const boolean = {
+	$TAPE_SCHEMA,
+	$type: BOOLEAN
+}
+
 const any = $values => {
 	return {
 		$TAPE_SCHEMA,
@@ -136,78 +148,10 @@ const any = $values => {
 	}
 }
 
-// const colors = require('ansicolors')
-
-// const objectColor = val => {
-// 	return typeof val === 'number' ? colors.yellow(val) : colors.green(`'${val}'`)
-// }
-
-// const isDirectValue = val => ['boolean', 'number', 'string'].indexOf(typeof val) !== -1 || val === null
-
-// const test = (t, schema, object, prefix = '') => {
-// 	if (schema.$name) {
-// 		t.equal(1, 1, `${colors.brightBlack(`Schema:`)} ${colors.brightCyan(`"${schema.$name}"`)}`)
-// 	}
-
-// 	Object.keys(schema).forEach(key => {
-// 		if (key === '$name') {
-// 			return
-// 		}
-
-// 		const value = object[key]
-// 		const validation = schema[key]
-
-// 		if (Array.isArray(value)) {
-// 			return value.forEach((val, num) => test(t, ...validation, val, `.. ${prefix}${key}[${num}].`))
-// 		}
-
-// 		if (isDirectValue(validation)) {
-// 			return t.equal(
-// 				value,
-// 				validation,
-// 				`${colors.white(`${prefix}${key}`)} = ${objectColor(value)} ${colors.brightBlack('expected')} ${objectColor(validation)}`
-// 			)
-// 		}
-
-// 		return t.equal(
-// 			validation._exec(value),
-// 			true,
-// 			`${colors.white(`${prefix}${key}`)} = ${objectColor(value)} ${colors.brightBlack(validation._message)}`
-// 		)
-// 	})
-// }
-
-// const string = {
-// 	_message: 'schema.string',
-// 	_exec: value => typeof value === 'string'
-// }
-
-// const number = {
-// 	_message: 'schema.number',
-// 	_exec: value => typeof value === 'number'
-// }
-
-// const any = value => {
-// 	return {
-// 		_message: `schema.any([${value.map(val => {
-// 			if (isDirectValue(val)) {
-// 				return val
-// 			}
-
-
-// 			return val._message.slice(7)
-// 		}).join(', ')}])`,
-// 		_exec: () => {
-// 			return typeof value.find(val => {
-// 				return isDirectValue(val) ? val === value : val._exec(value) === true
-// 			}) === 'undefined'
-// 		}
-// 	}
-// }
-
 module.exports = {
 	test,
 	string,
 	number,
+	boolean,
 	any
 }
