@@ -5,6 +5,8 @@ const $TAPE_SCHEMA = '$TAPE_SCHEMA'
 const STRING = '$STRING'
 const NUMBER = '$NUMBER'
 const NATURAL_NUMBER = '$NATURAL_NUMBER'
+const LATITUDE = '$LATITUDE'
+const LONGITUDE = '$LONGITUDE'
 const ANY = '$ANY'
 const BOOLEAN = '$BOOLEAN'
 
@@ -90,6 +92,18 @@ const validator = (schema, object, prefix = '') => {
 				target: true,
 				msg: `${colors.white(prefix)} = ${showObject(object)} ${colors.brightBlack('schema.any')}`
 			}
+		} else if (schema.$type === LATITUDE) {
+			return {
+				value: typeof object === 'number' && object > -90 && object < 90,
+				target: true,
+				msg: `${colors.white(prefix)} = ${showObject(object)} ${colors.brightBlack('schema.latitude')}`
+			}
+		} else if (schema.$type === LONGITUDE) {
+			return {
+				value: typeof object === 'number' && object > -180 && object < 180,
+				target: true,
+				msg: `${colors.white(prefix)} = ${showObject(object)} ${colors.brightBlack('schema.longitude')}`
+			}
 		}
 	}
 
@@ -147,6 +161,16 @@ const naturalNumber = {
 	$type: NATURAL_NUMBER
 }
 
+const latitude = {
+	$TAPE_SCHEMA,
+	$type: LATITUDE
+}
+
+const longitude = {
+	$TAPE_SCHEMA,
+	$type: LONGITUDE
+}
+
 const boolean = {
 	$TAPE_SCHEMA,
 	$type: BOOLEAN
@@ -165,6 +189,8 @@ module.exports = {
 	string,
 	number,
 	naturalNumber,
+	latitude,
+	longitude,
 	boolean,
 	any
 }
