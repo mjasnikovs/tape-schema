@@ -4,6 +4,7 @@ const $TAPE_SCHEMA = '$TAPE_SCHEMA'
 
 const STRING = '$STRING'
 const NUMBER = '$NUMBER'
+const NATURAL_NUMBER = '$NATURAL_NUMBER'
 const ANY = '$ANY'
 const BOOLEAN = '$BOOLEAN'
 
@@ -63,6 +64,12 @@ const validator = (schema, object, prefix = '') => {
 				value: typeof object === 'number' && Number(object) === object && object !== Infinity,
 				target: true,
 				msg: `${colors.white(prefix)} = ${showObject(object)} ${colors.brightBlack('schema.number')}`
+			}
+		} else if (schema.$type === NATURAL_NUMBER) {
+			return {
+				value: typeof object === 'number' && object % 1 === 0 && Number.isInteger(object) && object >= 0,
+				target: true,
+				msg: `${colors.white(prefix)} = ${showObject(object)} ${colors.brightBlack('schema.naturalNumber')}`
 			}
 		} else if (schema.$type === BOOLEAN) {
 			return {
@@ -135,6 +142,11 @@ const number = {
 	$type: NUMBER
 }
 
+const naturalNumber = {
+	$TAPE_SCHEMA,
+	$type: NATURAL_NUMBER
+}
+
 const boolean = {
 	$TAPE_SCHEMA,
 	$type: BOOLEAN
@@ -152,6 +164,7 @@ module.exports = {
 	test,
 	string,
 	number,
+	naturalNumber,
 	boolean,
 	any
 }
