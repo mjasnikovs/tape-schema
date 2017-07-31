@@ -122,7 +122,7 @@ const validator = (schema, object, prefix = '') => {
 	if (Array.isArray(schema)) {
 		if (Array.isArray(object)) {
 			return object.map((val, num) => {
-				return validator(...schema, val, `.. ${prefix}[${num}]`)
+				return validator(...schema, val, `${colors.brightBlack('..')} ${prefix}[${num}]`)
 			})
 		}
 
