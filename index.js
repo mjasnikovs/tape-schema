@@ -5,10 +5,12 @@ const $TAPE_SCHEMA = '$TAPE_SCHEMA'
 const STRING = '$STRING'
 const NUMBER = '$NUMBER'
 const NATURAL_NUMBER = '$NATURAL_NUMBER'
+const BOOLEAN = '$BOOLEAN'
+const ANY = '$ANY'
+
 const LATITUDE = '$LATITUDE'
 const LONGITUDE = '$LONGITUDE'
-const ANY = '$ANY'
-const BOOLEAN = '$BOOLEAN'
+const FUNCTION = '$FUNCTION'
 
 const isDirectValue = val => ['boolean', 'number', 'string'].indexOf(typeof val) !== -1 || val === null
 
@@ -104,6 +106,12 @@ const validator = (schema, object, prefix = '') => {
 				target: true,
 				msg: `${colors.white(prefix)} = ${showObject(object)} ${colors.brightBlack('schema.longitude')}`
 			}
+		} else if (schema.$type === FUNCTION) {
+			return {
+				value: typeof object,
+				target: 'function',
+				msg: `${colors.white(prefix)} = ${showObject(object)} ${colors.brightBlack('schema.func')}`
+			}
 		}
 	}
 
@@ -161,16 +169,6 @@ const naturalNumber = {
 	$type: NATURAL_NUMBER
 }
 
-const latitude = {
-	$TAPE_SCHEMA,
-	$type: LATITUDE
-}
-
-const longitude = {
-	$TAPE_SCHEMA,
-	$type: LONGITUDE
-}
-
 const boolean = {
 	$TAPE_SCHEMA,
 	$type: BOOLEAN
@@ -184,13 +182,29 @@ const any = $values => {
 	}
 }
 
+const latitude = {
+	$TAPE_SCHEMA,
+	$type: LATITUDE
+}
+
+const longitude = {
+	$TAPE_SCHEMA,
+	$type: LONGITUDE
+}
+
+const func = {
+	$TAPE_SCHEMA,
+	$type: FUNCTION
+}
+
 module.exports = {
 	test,
 	string,
 	number,
 	naturalNumber,
+	boolean,
+	any,
 	latitude,
 	longitude,
-	boolean,
-	any
+	func
 }
