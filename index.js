@@ -11,7 +11,7 @@ const ANY = '$ANY'
 const LATITUDE = '$LATITUDE'
 const LONGITUDE = '$LONGITUDE'
 const FUNCTION = '$FUNCTION'
-const REGEX_TEST = '$REGEX_TEST' 
+const REGEX_TEST = '$REGEX_TEST'
 
 const isDirectValue = val => ['boolean', 'number', 'string'].indexOf(typeof val) !== -1 || val === null
 

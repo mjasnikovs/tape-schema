@@ -113,3 +113,11 @@ const schema = {
  	foo: schema.func
 }
 ```
+
+### regexTest
+Specifies that the input shoud be validated by regex test
+```JS
+const schema = {
+ 	string: schema.regexTest(/^Edgars$/)
+}
+```
