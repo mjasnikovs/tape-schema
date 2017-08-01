@@ -82,7 +82,7 @@ const schemaObject = {
 }
 ```
 
-### any
+### any([values])
 Specifies that the input is any value in array.
 ```javascript
 const schemaObject = {
