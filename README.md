@@ -9,7 +9,7 @@ npm install --save-dev tape-schema
 ## example
 ```JS
 const test = require('tape')
-const schema = require('../index.js')
+const schema = require('tape-schema')
 
 const schemaObject = {
 	id: schema.number,
