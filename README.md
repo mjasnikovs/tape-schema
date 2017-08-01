@@ -1,4 +1,4 @@
-# tape-schema
+# tape-schema [![Build Status](https://travis-ci.org/mjasnikovs/tape-schema.svg?branch=master)](https://travis-ci.org/mjasnikovs/tape-schema)
 tap-producing test harness schema validation for node
 
 ## install
