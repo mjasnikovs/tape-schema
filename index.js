@@ -11,6 +11,7 @@ const ANY = '$ANY'
 const LATITUDE = '$LATITUDE'
 const LONGITUDE = '$LONGITUDE'
 const FUNCTION = '$FUNCTION'
+const REGEX_TEST = '$REGEX_TEST' 
 
 const isDirectValue = val => ['boolean', 'number', 'string'].indexOf(typeof val) !== -1 || val === null
 
@@ -116,6 +117,12 @@ const validator = (schema, object, prefix = '') => {
 				target: 'function',
 				msg: `${colors.white(prefix)} = ${showObject(object)} ${colors.brightBlack('schema.func')}`
 			}
+		} else if (schema.$type === REGEX_TEST) {
+			return {
+				value: schema.$values.test(object),
+				target: true,
+				msg: `${colors.white(prefix)} = ${showObject(object)} ${colors.brightBlack('schema.regexTest')}`
+			}
 		}
 	}
 
@@ -201,6 +208,14 @@ const func = {
 	$type: FUNCTION
 }
 
+const regexTest = $values => {
+	return {
+		$TAPE_SCHEMA,
+		$type: REGEX_TEST,
+		$values
+	}
+}
+
 module.exports = {
 	test,
 	string,
@@ -210,5 +225,6 @@ module.exports = {
 	any,
 	latitude,
 	longitude,
+	regexTest,
 	func
 }
