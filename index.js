@@ -142,7 +142,7 @@ const validator = (schema, object, prefix = '') => {
 
 	return Object.keys(schema).map(key => {
 		if (object) {
-			return validator(schema[key], object[key], `${prefix}${key}`)
+			return validator(schema[key], object[key], `${prefix}${prefix ? colors.brightBlack('.') : ''}${key}`)
 		}
 
 		return {

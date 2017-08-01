@@ -23,6 +23,11 @@ test('string', t => {
 		directString: 'String',
 		directNumber: 'Number',
 		arrayWrongTarget: [schema.any([null, objectTarget])],
+		deepObject: {
+			target: {
+				value: schema.number
+			}
+		},
 		friendList: [
 			{
 				id: schema.number,
@@ -49,6 +54,11 @@ test('string', t => {
 		directNumber: 'Number',
 		arrayTarget: ['One', 'Two', null],
 		arrayWrongTarget: [null, {id: 1, name: 'Edgars'}],
+		deepObject: {
+			target: {
+				value: 1
+			}
+		},
 		friendList: [
 			{
 				id: 1,
