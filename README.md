@@ -53,7 +53,7 @@ Validate schema agains given object
 ### string
 Specifies that the input is an typeof string.
 ```JS
-const schema = {
+const schemaObject = {
  	name: schema.string
 }
 ```
@@ -61,7 +61,7 @@ const schema = {
 ### number
 Specifies that the input is number.
 ```JS
-const schema = {
+const schemaObject = {
  	discount: schema.number
 }
 ```
@@ -69,7 +69,7 @@ const schema = {
 ### naturalNumber
 Specifies that the input is natural number. (including 0)
 ```JS
-const schema = {
+const schemaObject = {
  	age: schema.naturalNumber
 }
 ```
@@ -77,7 +77,7 @@ const schema = {
 ### boolean
 Specifies that the input is boolean.
 ```JS
-const schema = {
+const schemaObject = {
  	isOnline: schema.boolean
 }
 ```
@@ -85,7 +85,7 @@ const schema = {
 ### any
 Specifies that the input is any value in array.
 ```JS
-const schema = {
+const schemaObject = {
  	task: schema.any([null, schema.string, 'assigned'])
 }
 ```
@@ -93,7 +93,7 @@ const schema = {
 ### latitude
 Specifies that the input is latitude.
 ```JS
-const schema = {
+const schemaObject = {
  	latitude: schema.latitude
 }
 ```
@@ -101,7 +101,7 @@ const schema = {
 ### longitude
 Specifies that the input is longitude.
 ```JS
-const schema = {
+const schemaObject = {
  	longitude: schema.longitude
 }
 ```
@@ -109,7 +109,7 @@ const schema = {
 ### func
 Specifies that the input is typeof function.
 ```JS
-const schema = {
+const schemaObject = {
  	foo: schema.func
 }
 ```
@@ -117,7 +117,7 @@ const schema = {
 ### regexTest
 Specifies that the input shoud be validated by regex test
 ```JS
-const schema = {
+const schemaObject = {
  	string: schema.regexTest(/^Edgars$/)
 }
 ```
