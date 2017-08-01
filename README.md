@@ -7,7 +7,7 @@ npm install --save-dev tape-schema
 ```
 
 ## example
-```JS
+```javascript
 const test = require('tape')
 const schema = require('tape-schema')
 
@@ -52,7 +52,7 @@ Validate schema agains given object
 
 ### string
 Specifies that the input is an typeof string.
-```JS
+```javascript
 const schemaObject = {
  	name: schema.string
 }
@@ -60,7 +60,7 @@ const schemaObject = {
 
 ### number
 Specifies that the input is number.
-```JS
+```javascript
 const schemaObject = {
  	discount: schema.number
 }
@@ -68,7 +68,7 @@ const schemaObject = {
 
 ### naturalNumber
 Specifies that the input is natural number. (including 0)
-```JS
+```javascript
 const schemaObject = {
  	age: schema.naturalNumber
 }
@@ -76,7 +76,7 @@ const schemaObject = {
 
 ### boolean
 Specifies that the input is boolean.
-```JS
+```javascript
 const schemaObject = {
  	isOnline: schema.boolean
 }
@@ -84,7 +84,7 @@ const schemaObject = {
 
 ### any
 Specifies that the input is any value in array.
-```JS
+```javascript
 const schemaObject = {
  	task: schema.any([null, schema.string, 'assigned'])
 }
@@ -92,7 +92,7 @@ const schemaObject = {
 
 ### latitude
 Specifies that the input is latitude.
-```JS
+```javascript
 const schemaObject = {
  	latitude: schema.latitude
 }
@@ -100,7 +100,7 @@ const schemaObject = {
 
 ### longitude
 Specifies that the input is longitude.
-```JS
+```javascript
 const schemaObject = {
  	longitude: schema.longitude
 }
@@ -108,7 +108,7 @@ const schemaObject = {
 
 ### func
 Specifies that the input is typeof function.
-```JS
+```javascript
 const schemaObject = {
  	foo: schema.func
 }
@@ -116,7 +116,7 @@ const schemaObject = {
 
 ### regexTest
 Specifies that the input shoud be validated by regex test
-```JS
+```javascript
 const schemaObject = {
  	string: schema.regexTest(/^Edgars$/)
 }
