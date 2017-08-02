@@ -1,16 +1,32 @@
 const test = require('tape')
 const schema = require('../index.js')
 
-const schemaObject = [
+const schemaEmptyArray = [
 	{
 		id: schema.naturalNumber,
 		name: schema.string
 	}
 ]
 
-const object = []
+test('empty array', t => {
+	t.plan(1)
+	const fakeTape = {
+		equal: (value, target, msg) => t.notEqual(value, target, msg)
+	}
 
-test('empty', t => {
-	schema.test(t, schemaObject, object)
-	t.end()
+	schema.test(fakeTape, schemaEmptyArray, [])
+})
+
+const schemaEmptyObject = {
+	id: schema.naturalNumber,
+	name: schema.string
+}
+
+test('empty object', t => {
+	t.plan(2)
+	const fakeTape = {
+		equal: (value, target, msg) => t.notEqual(value, target, msg)
+	}
+
+	schema.test(fakeTape, schemaEmptyObject, {})
 })

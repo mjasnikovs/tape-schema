@@ -128,6 +128,14 @@ const validator = (schema, object, prefix = '') => {
 
 	if (Array.isArray(schema)) {
 		if (Array.isArray(object)) {
+			if (!object.length) {
+				return {
+					value: false,
+					target: true,
+					msg: `${colors.white(prefix)} = ${showObject(object)} ${colors.brightBlack('required non-empty typeof Array for further validation')}`
+				}
+			}
+
 			return object.map((val, num) => {
 				return validator(...schema, val, `${colors.brightBlack('..')} ${prefix}[${num}]`)
 			})
