@@ -29,7 +29,7 @@ const object = {
 	]
 }
 
-test('Readme test', t => {
+test('readme', t => {
 	schema.test(t, schemaObject, object)
 	t.end()
 })
