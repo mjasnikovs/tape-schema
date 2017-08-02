@@ -1,6 +1,6 @@
 {
   "name": "tape-schema",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "tap-producing test harness schema validation for node",
   "main": "index.js",
   "scripts": {
