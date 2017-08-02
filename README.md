@@ -45,6 +45,8 @@ test('Readme test', t => {
 })
 ```
 
+![shot](assets/test.png)
+
 ## API
 
 ### schema.test([tape], [schema], [object])
