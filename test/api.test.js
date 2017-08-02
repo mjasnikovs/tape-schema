@@ -10,7 +10,8 @@ const schemaObject = {
 	latitude: schema.latitude,
 	longitude: schema.longitude,
 	func: schema.func,
-	regexTest: schema.regexTest(/^test$/)
+	regexTest: schema.regexTest(/^test$/),
+	undef: schema.undef
 }
 
 const object = {
@@ -22,7 +23,8 @@ const object = {
 	latitude: 80,
 	longitude: 80,
 	func: () => {return null},
-	regexTest: 'test'
+	regexTest: 'test',
+	undef: undefined
 }
 
 test('api', t => {

@@ -12,6 +12,7 @@ const LATITUDE = '$LATITUDE'
 const LONGITUDE = '$LONGITUDE'
 const FUNCTION = '$FUNCTION'
 const REGEX_TEST = '$REGEX_TEST'
+const UNDEFINED = '$UNDEFINED'
 
 const isDirectValue = val => ['boolean', 'number', 'string'].indexOf(typeof val) !== -1 || val === null
 
@@ -123,6 +124,12 @@ const validator = (schema, object, prefix = '') => {
 				target: true,
 				msg: `${colors.white(prefix)} = ${showObject(object)} ${colors.brightBlack('schema.regexTest')}`
 			}
+		} else if (schema.$type === UNDEFINED) {
+			return {
+				value: typeof object,
+				target: 'undefined',
+				msg: `${colors.white(prefix)} = ${showObject(object)} ${colors.brightBlack('schema.undef')}`
+			}
 		}
 	}
 
@@ -224,6 +231,11 @@ const regexTest = $values => {
 	}
 }
 
+const undef = {
+	$TAPE_SCHEMA,
+	$type: UNDEFINED
+}
+
 module.exports = {
 	test,
 	string,
@@ -234,5 +246,6 @@ module.exports = {
 	latitude,
 	longitude,
 	regexTest,
+	undef,
 	func
 }

@@ -121,3 +121,11 @@ const schemaObject = {
  	string: schema.regexTest(/^Edgars$/)
 }
 ```
+
+### undef
+Specifies that the input shoud be typeof undefined
+```javascript
+const schemaObject = {
+ 	string: schema.undef
+}
+```
