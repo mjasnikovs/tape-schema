@@ -135,7 +135,7 @@ const validator = (schema, object, prefix = '') => {
 
 	if (Array.isArray(schema)) {
 		if (Array.isArray(object)) {
-			if (!object.length) {
+			if (!object.length && schema.length) {
 				return {
 					value: false,
 					target: true,
