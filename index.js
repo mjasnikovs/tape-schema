@@ -151,6 +151,12 @@ const validator = (schema, object, prefix = '') => {
 				}
 			}
 
+			if (schema.length > 1) {
+				return schema.map((val, num) => {
+					return validator(val, object[num], `${colors.brightBlack('..')} ${prefix}[${colors.yellow(num)}]`)
+				})
+			}
+
 			return object.map((val, num) => {
 				return validator(...schema, val, `${colors.brightBlack('..')} ${prefix}[${colors.yellow(num)}]`)
 			})
