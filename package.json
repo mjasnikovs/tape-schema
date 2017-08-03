@@ -3,11 +3,6 @@
   "version": "1.0.10",
   "description": "tap-producing test harness schema validation for node",
   "main": "index.js",
-  "scripts": {
-    "test": "tape ./test/**/*.js | tap-spec"
-  },
-  "author": "Edgars Mjasnikovs",
-  "license": "MIT",
   "dependencies": {
     "ansicolors": "^0.3.2"
   },
@@ -17,5 +12,23 @@
     "eslint-plugin-babel": "^4.1.2",
     "tap-spec": "^4.1.1",
     "tape": "^4.7.0"
-  }
+  },
+  "scripts": {
+    "test": "tape ./test/**/*.js | tap-spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mjasnikovs/tape-schema.git"
+  },
+  "keywords": [
+    "tape",
+    "schema",
+    "validation"
+  ],
+  "author": "Edgars Mjasņiokovs",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mjasnikovs/tape-schema/issues"
+  },
+  "homepage": "https://github.com/mjasnikovs/tape-schema#readme"
 }
