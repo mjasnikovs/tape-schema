@@ -62,6 +62,14 @@ const validator = (schema, object, prefix = '') => {
 		}
 	}
 
+	if (typeof schema === 'undefined') {
+		return {
+			value: false,
+			target: true,
+			msg: `${colors.white(prefix)} = ${showObject(object)} ${colors.brightBlack('schema can\'t be typeof undefined, use schema.undef to validate undefined values')}`
+		}
+	}
+
 	if (schema.$TAPE_SCHEMA === $TAPE_SCHEMA) {
 		if (schema.$type === STRING) {
 			return {
