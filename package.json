@@ -4,7 +4,7 @@
   "description": "tap-producing test harness schema validation for node",
   "main": "index.js",
   "dependencies": {
-    "ansicolors": "^0.3.2"
+    "ansicolors": "0.3.2"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
