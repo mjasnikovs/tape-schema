@@ -9,12 +9,12 @@ const schemaEmptyArray = [
 ]
 
 test('empty array', t => {
+	t.plan(1)
 	const fakeTape = {
 		equal: (value, target, msg) => t.notEqual(value, target, msg)
 	}
 
 	schema.test(fakeTape, schemaEmptyArray, [])
-	t.end()
 })
 
 test('empty array vs empty array schema', t => {
@@ -23,12 +23,12 @@ test('empty array vs empty array schema', t => {
 })
 
 test('empty array vs empty array schema invalid', t => {
+	t.plan(1)
 	const fakeTape = {
 		equal: (value, target, msg) => t.notEqual(value, target, msg)
 	}
 
 	schema.test(fakeTape, {array: []}, {array: [null]})
-	t.end()
 })
 
 const schemaEmptyObject = {
@@ -37,12 +37,12 @@ const schemaEmptyObject = {
 }
 
 test('empty object', t => {
+	t.plan(2)
 	const fakeTape = {
 		equal: (value, target, msg) => t.notEqual(value, target, msg)
 	}
 
 	schema.test(fakeTape, schemaEmptyObject, {})
-	t.end()
 })
 
 test('empty object vs empty object schema', t => {

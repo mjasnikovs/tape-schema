@@ -28,6 +28,6 @@ const object = {
 }
 
 test('api', t => {
+	t.plan(10)
 	schema.test(t, schemaObject, object)
-	t.end()
 })

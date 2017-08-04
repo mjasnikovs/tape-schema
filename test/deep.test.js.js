@@ -56,6 +56,6 @@ const object = {
 }
 
 test('deep', t => {
+	t.plan(12)
 	schema.test(t, schemaObject, object)
-	t.end()
 })

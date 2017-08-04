@@ -16,6 +16,6 @@ const object = [
 ]
 
 test('arrayInArray', t => {
+	t.plan(2)
 	schema.test(t, schemaObject, object)
-	t.end()
 })

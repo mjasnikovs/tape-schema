@@ -12,10 +12,10 @@ const object = {
 }
 
 test('undefined', t => {
+	t.plan(1)
 	const fakeTape = {
 		equal: (value, target, msg) => t.notEqual(value, target, msg)
 	}
 
 	schema.test(fakeTape, schemaObject, object)
-	t.end()
 })

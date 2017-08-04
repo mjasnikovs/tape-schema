@@ -30,6 +30,6 @@ const object = {
 }
 
 test('readme', t => {
+	t.plan(7)
 	schema.test(t, schemaObject, object)
-	t.end()
 })
