@@ -1,4 +1,9 @@
-const colors = require('ansicolors')
+const {
+	white,
+	brightBlack,
+	yellow,
+	green
+} = require('ansicolors')
 
 const $TAPE_SCHEMA = '$TAPE_SCHEMA'
 
@@ -18,16 +23,16 @@ const isDirectValue = val => ['boolean', 'number', 'string'].indexOf(typeof val)
 
 const showObject = val => {
 	if (typeof val === 'function') {
-		return `${colors.white('[')}${colors.yellow('Function')}${colors.white(']')}`
+		return `${white('[')}${yellow('Function')}${white(']')}`
 	}
 
 	const value = isDirectValue(val) ? val : JSON.stringify(val, null, 4)
 
 	if (typeof value === 'number' || typeof value === 'boolean' || value === null) {
-		return colors.yellow(value)
+		return yellow(value)
 	}
 
-	return colors.green(`'${value}'`)
+	return green(`'${value}'`)
 }
 
 const validAny = object => {
@@ -58,7 +63,7 @@ const validator = (schema, object, prefix = '') => {
 		return {
 			value: schema,
 			target: object,
-			msg: `${colors.white(prefix)} = ${showObject(object)} ${colors.brightBlack(`value "${schema}"`)}`
+			msg: `${white(prefix)} = ${showObject(object)} ${brightBlack(`value "${schema}"`)}`
 		}
 	}
 
@@ -66,7 +71,7 @@ const validator = (schema, object, prefix = '') => {
 		return {
 			value: false,
 			target: true,
-			msg: `${colors.white(prefix)} = ${showObject(object)} ${colors.brightBlack('schema can\'t be typeof undefined, use schema.undef to validate undefined values')}`
+			msg: `${white(prefix)} = ${showObject(object)} ${brightBlack('schema can\'t be typeof undefined, use schema.undef to validate undefined values')}`
 		}
 	}
 
@@ -75,25 +80,25 @@ const validator = (schema, object, prefix = '') => {
 			return {
 				value: typeof object,
 				target: 'string',
-				msg: `${colors.white(prefix)} = ${showObject(object)} ${colors.brightBlack('schema.string')}`
+				msg: `${white(prefix)} = ${showObject(object)} ${brightBlack('schema.string')}`
 			}
 		} else if (schema.$type === NUMBER) {
 			return {
 				value: typeof object === 'number' && Number(object) === object && object !== Infinity,
 				target: true,
-				msg: `${colors.white(prefix)} = ${showObject(object)} ${colors.brightBlack('schema.number')}`
+				msg: `${white(prefix)} = ${showObject(object)} ${brightBlack('schema.number')}`
 			}
 		} else if (schema.$type === NATURAL_NUMBER) {
 			return {
 				value: typeof object === 'number' && object % 1 === 0 && Number.isInteger(object) && object >= 0,
 				target: true,
-				msg: `${colors.white(prefix)} = ${showObject(object)} ${colors.brightBlack('schema.naturalNumber')}`
+				msg: `${white(prefix)} = ${showObject(object)} ${brightBlack('schema.naturalNumber')}`
 			}
 		} else if (schema.$type === BOOLEAN) {
 			return {
 				value: typeof object,
 				target: 'boolean',
-				msg: `${colors.white(prefix)} = ${showObject(object)} ${colors.brightBlack('schema.boolean')}`
+				msg: `${white(prefix)} = ${showObject(object)} ${brightBlack('schema.boolean')}`
 			}
 		} else if (schema.$type === ANY) {
 			const result = schema.$values.map(anySchema => validator(anySchema, object, prefix))
@@ -106,37 +111,37 @@ const validator = (schema, object, prefix = '') => {
 			return {
 				value: true,
 				target: true,
-				msg: `${colors.white(prefix)} = ${showObject(object)} ${colors.brightBlack('schema.any')}`
+				msg: `${white(prefix)} = ${showObject(object)} ${brightBlack('schema.any')}`
 			}
 		} else if (schema.$type === LATITUDE) {
 			return {
 				value: typeof object === 'number' && object > -90 && object < 90,
 				target: true,
-				msg: `${colors.white(prefix)} = ${showObject(object)} ${colors.brightBlack('schema.latitude')}`
+				msg: `${white(prefix)} = ${showObject(object)} ${brightBlack('schema.latitude')}`
 			}
 		} else if (schema.$type === LONGITUDE) {
 			return {
 				value: typeof object === 'number' && object > -180 && object < 180,
 				target: true,
-				msg: `${colors.white(prefix)} = ${showObject(object)} ${colors.brightBlack('schema.longitude')}`
+				msg: `${white(prefix)} = ${showObject(object)} ${brightBlack('schema.longitude')}`
 			}
 		} else if (schema.$type === FUNCTION) {
 			return {
 				value: typeof object,
 				target: 'function',
-				msg: `${colors.white(prefix)} = ${showObject(object)} ${colors.brightBlack('schema.func')}`
+				msg: `${white(prefix)} = ${showObject(object)} ${brightBlack('schema.func')}`
 			}
 		} else if (schema.$type === REGEX_TEST) {
 			return {
 				value: schema.$values.test(object),
 				target: true,
-				msg: `${colors.white(prefix)} = ${showObject(object)} ${colors.brightBlack('schema.regexTest')}`
+				msg: `${white(prefix)} = ${showObject(object)} ${brightBlack('schema.regexTest')}`
 			}
 		} else if (schema.$type === UNDEFINED) {
 			return {
 				value: typeof object,
 				target: 'undefined',
-				msg: `${colors.white(prefix)} = ${showObject(object)} ${colors.brightBlack('schema.undef')}`
+				msg: `${white(prefix)} = ${showObject(object)} ${brightBlack('schema.undef')}`
 			}
 		}
 	}
@@ -147,37 +152,37 @@ const validator = (schema, object, prefix = '') => {
 				return {
 					value: false,
 					target: true,
-					msg: `${colors.white(prefix)} = ${showObject(object)} ${colors.brightBlack('required non-empty typeof Array for further validation')}`
+					msg: `${white(prefix)} = ${showObject(object)} ${brightBlack('required non-empty typeof Array for further validation')}`
 				}
 			}
 
 			if (schema.length > 1) {
 				return schema.map((val, num) => {
-					return validator(val, object[num], `${colors.brightBlack('..')} ${prefix}[${colors.yellow(num)}]`)
+					return validator(val, object[num], `${brightBlack('..')} ${prefix}[${yellow(num)}]`)
 				})
 			}
 
 			return object.map((val, num) => {
-				return validator(...schema, val, `${colors.brightBlack('..')} ${prefix}[${colors.yellow(num)}]`)
+				return validator(...schema, val, `${brightBlack('..')} ${prefix}[${yellow(num)}]`)
 			})
 		}
 
 		return {
 			value: false,
 			target: true,
-			msg: `${colors.white(prefix)} = ${showObject(object)} ${colors.brightBlack('required typeof Array for further validation')}`
+			msg: `${white(prefix)} = ${showObject(object)} ${brightBlack('required typeof Array for further validation')}`
 		}
 	}
 
 	return Object.keys(schema).map(key => {
 		if (object) {
-			return validator(schema[key], object[key], `${prefix}${prefix ? colors.brightBlack('.') : ''}${key}`)
+			return validator(schema[key], object[key], `${prefix}${prefix ? brightBlack('.') : ''}${key}`)
 		}
 
 		return {
 			value: false,
 			target: true,
-			msg: `${colors.white(prefix)} = ${showObject(object)} ${colors.brightBlack('required typeof Object for further validation')}`
+			msg: `${white(prefix)} = ${showObject(object)} ${brightBlack('required typeof Object for further validation')}`
 		}
 	})
 }
@@ -186,6 +191,7 @@ const equalTest = (t, result) => {
 	if (Array.isArray(result)) {
 		return result.forEach(val => equalTest(t, val))
 	}
+
 	const {value, target, msg} = result
 	return t.equal(value, target, msg)
 }
