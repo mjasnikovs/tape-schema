@@ -174,7 +174,17 @@ const validator = (schema, object, prefix = '') => {
 		}
 	}
 
-	return Object.keys(schema).map(key => {
+	const overflow = Object.keys(object || {})
+		.filter(objectKey => !schema.hasOwnProperty(objectKey))
+		.map(objectKey => {
+			return {
+				value: false,
+				target: true,
+				msg: `${prefix}${prefix ? brightBlack('.') : ''}${white(objectKey)} ${brightBlack('is not defined in schema')}`
+			}
+		})
+
+	const validatorResult = Object.keys(schema).map(key => {
 		if (object) {
 			return validator(schema[key], object[key], `${prefix}${prefix ? brightBlack('.') : ''}${key}`)
 		}
@@ -185,6 +195,8 @@ const validator = (schema, object, prefix = '') => {
 			msg: `${white(prefix)} = ${showObject(object)} ${brightBlack('required typeof Object for further validation')}`
 		}
 	})
+
+	return [validatorResult, overflow]
 }
 
 const equalTest = (t, result) => {
