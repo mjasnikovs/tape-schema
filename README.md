@@ -1,11 +1,10 @@
 # tape-schema [![Build Status](https://travis-ci.org/mjasnikovs/tape-schema.svg?branch=master)](https://travis-ci.org/mjasnikovs/tape-schema)
-Schema validation for node.js inside tape test harness.
+Schema validation for node.js inside [tape](https://github.com/substack/tape) test harness.
 - compare javascript object to a schema
 - combine schemas to make testing more consistent
 - pinpoint error, even in deeply nested objects
 - powerful **any** function provides flexibility
 - validate missing schema definition, error if an object contains more data than schema
-
 
 ## install
 ```
