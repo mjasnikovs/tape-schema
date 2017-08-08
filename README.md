@@ -1,6 +1,6 @@
-# tape-schema [![Build Status](https://travis-ci.org/mjasnikovs/tape-schema.svg?branch=master)](https://travis-ci.org/mjasnikovs/tape-schema)
-
 ![logo](assets/logo.jpg)
+
+# tape-schema [![Build Status](https://travis-ci.org/mjasnikovs/tape-schema.svg?branch=master)](https://travis-ci.org/mjasnikovs/tape-schema)
 
 Schema validation for node.js inside [tape](https://github.com/substack/tape) test harness.
 - compare javascript object to a schema
