@@ -156,6 +156,14 @@ const validator = (schema, object, prefix = '') => {
 				}
 			}
 
+			if (!schema.length && object.length) {
+				return {
+					value: false,
+					target: true,
+					msg: `${white(prefix)} = ${showObject(object)} ${brightBlack('required empty typeof Array, object contains data')}`
+				}
+			}
+
 			if (schema.length > 1) {
 				return schema.map((val, num) => {
 					return validator(val, object[num], `${brightBlack('..')} ${prefix}[${yellow(num)}]`)
