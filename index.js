@@ -58,13 +58,6 @@ const invalidAny = object => {
 	}, [])
 }
 
-const overflowFilter = val => {
-	if (typeof val === 'string') {
-		return {}
-	}
-	return val || {}
-}
-
 const validator = (schema, object, prefix = '') => {
 	if (isDirectValue(schema)) {
 		return {
@@ -172,6 +165,14 @@ const validator = (schema, object, prefix = '') => {
 			}
 
 			if (schema.length > 1) {
+				if (schema.length !== object.length) {
+					return {
+						value: false,
+						target: true,
+						msg: `${white(prefix)} = ${showObject(object)} ${brightBlack(`required equal Array length, schema: ${schema.length}, object: ${object.length}`)}`
+					}
+				}
+
 				return schema.map((val, num) => {
 					return validator(val, object[num], `${brightBlack('..')} ${prefix}[${yellow(num)}]`)
 				})
@@ -189,15 +190,25 @@ const validator = (schema, object, prefix = '') => {
 		}
 	}
 
-	const overflow = Object.keys(overflowFilter(object))
-		.filter(objectKey => !schema.hasOwnProperty(objectKey))
-		.map(objectKey => {
+	const overflow = (() => {
+		if (isDirectValue(object)) {
 			return {
 				value: false,
 				target: true,
-				msg: `${prefix}${prefix ? brightBlack('.') : ''}${white(objectKey)} ${brightBlack('is not defined in schema')}`
+				msg: `${prefix}${prefix ? brightBlack('.') : ''}${white(object)} ${brightBlack('is not defined in schema')}`
 			}
-		})
+		}
+
+		return Object.keys(object || {})
+			.filter(objectKey => !schema.hasOwnProperty(objectKey))
+			.map(objectKey => {
+				return {
+					value: false,
+					target: true,
+					msg: `${prefix}${prefix ? brightBlack('.') : ''}${white(objectKey)} ${brightBlack('is not defined in schema')}`
+				}
+			})
+	})()
 
 	const validatorResult = Object.keys(schema).map(key => {
 		if (object) {
