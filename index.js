@@ -58,6 +58,13 @@ const invalidAny = object => {
 	}, [])
 }
 
+const overflowFilter = val => {
+	if (typeof val === 'string') {
+		return {}
+	}
+	return val || {}
+}
+
 const validator = (schema, object, prefix = '') => {
 	if (isDirectValue(schema)) {
 		return {
@@ -182,7 +189,7 @@ const validator = (schema, object, prefix = '') => {
 		}
 	}
 
-	const overflow = Object.keys(object || {})
+	const overflow = Object.keys(overflowFilter(object))
 		.filter(objectKey => !schema.hasOwnProperty(objectKey))
 		.map(objectKey => {
 			return {
